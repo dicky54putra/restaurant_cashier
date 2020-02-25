@@ -15,7 +15,7 @@ class admin_model extends CI_Model
 
     public function getUserById($id)
     {
-        return $this->db->get('user')->row_array();
+        return $this->db->get_where('user', ['user_id' => $id])->row_array();
     }
 
     public function userAdd()
@@ -28,10 +28,31 @@ class admin_model extends CI_Model
             'user_status' => 1
         ];
         $this->db->insert('user', $data);
-        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  Successfully added a table.</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  Successfully added a user.</div>');
         redirect('admin/user');
         // var_dump($data);
         // die;
+    }
+
+    public function userDelete($id)
+    {
+        $this->db->delete('user', ['user_id' => $id]);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  Successfully delete a user.</div>');
+        redirect('admin/user');
+    }
+
+    public function userUpdate($id)
+    {
+        $data = [
+            'level_id' => $this->input->post('level_id'),
+            'user_status' => $this->input->post('user_status')
+        ];
+        // var_dump($data);
+        // die;
+        $this->db->where('user_id', $id);
+        $this->db->update('user', $data);
+        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  Successfully update a user.</div>');
+        redirect('admin/user');
     }
 
     public function getAllTable()
@@ -72,7 +93,7 @@ class admin_model extends CI_Model
     public function tableDelete($id)
     {
         $this->db->delete('table', ['table_id' => $id]);
-		$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  Successfully delete a table.</div>');
-		redirect('admin/table');
+        $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  Successfully delete a table.</div>');
+        redirect('admin/table');
     }
 }

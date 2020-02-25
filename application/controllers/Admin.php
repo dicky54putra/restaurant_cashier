@@ -115,19 +115,24 @@ class Admin extends CI_Controller
 			$data = [
 				'title' => 'User Add',
 				'levelall' => $this->admin_model->getAllLevel(),
-				'action' => site_url('admin/user'),
+				'action' => site_url('admin/user_detail/' . $row['user_id']),
 				'disable' => 'disabled',
 				'disable2' => '',
 				'button' => 'SAVE',
 				'user_name' => set_value('user_name', $row['user_name']),
 				'user_username' => set_value('user_name', $row['user_username']),
-				'user_status' => set_value('user_satus', $row['user_status'])
+				'user_status' => set_value('user_satus', $row['user_status']),
+				'user_level' => $row['level_id'],
+				'user_delete' => '<a href="' . site_url('admin/user_delete/' . $row['user_id']) . '"onclick="return confirm(' . "'Anda yakin?'" . ')" class="btn btn-flat bg-red">Delete</a>'
 			];
 		}
 		$this->load->view('template/header', $data);
 		$this->load->view('template/navbar', $data);
 		$this->load->view('admin/user_form', $data);
 		$this->load->view('template/footer');
+		if ($this->input->post()) {
+			$this->admin_model->userUpdate($id);
+		}
 	}
 
 	public function user_add()
@@ -141,7 +146,8 @@ class Admin extends CI_Controller
 			'button' => 'SAVE',
 			'user_name' => '',
 			'user_username' => '',
-			'user_status' => ''
+			'user_status' => '',
+			'user_delete' => ''
 		];
 		$this->form_validation->set_rules('user_name', 'Name user', 'trim|required');
 		$this->form_validation->set_rules('user_username', 'Username', 'trim|required|is_unique[user.user_username]');
@@ -159,23 +165,8 @@ class Admin extends CI_Controller
 		}
 	}
 
-	public function user_status($id)
-	{
-		$level = $this->admin_model->getUserById($id);
-		if ($level['user_status'] == 1) {
-			$this->db->where('user_id', $id);
-			$this->db->update('user', ['user_status' => 2]);
-			redirect('admin/user');
-		} elseif ($level['user_status'] == 2) {
-			$this->db->where('user_id', $id);
-			$this->db->update('user', ['user_status' => 1]);
-			redirect('admin/user');
-		}
-	}
-
 	public function user_delete($id)
 	{
-		$this->db->delete('user', ['user_id' => $id]);
-		redirect('admin/user');
+		$this->admin_model->userDelete($id);
 	}
 }

@@ -5,7 +5,7 @@
         <section class="content-header">
             <h1>
                 <?= $title ?>
-                <a href="<?= site_url('admin/user_add') ?>" class="btn btn-xs btn-primary"><i class="fa fa-plus"> Add User</i></a>
+                <a href="<?= site_url('admin/user_add') ?>" class="btn btn-sm btn-flat bg-blue"><i class="fa fa-plus"> Add User</i></a>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="<?= base_url() ?>"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -16,6 +16,9 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <?= $this->session->flashdata('message'); ?>
+                </div>
                 <!-- table list -->
                 <?php foreach ($userall as $key) : ?>
                     <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">

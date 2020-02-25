@@ -24,19 +24,20 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label>Name</label>
-                                            <input type="text" class="form-control" name="user_name" placeholder="Enter name" autocomplete="off" value="<?= $user_name ?>">
+                                            <input type="text" class="form-control" name="user_name" placeholder="Enter name" autocomplete="off" value="<?= $user_name ?>" <?= $disable ?>>
                                             <?= form_error('user_name', '<span class="ml-3 text-danger">', '</span>') ?>
                                         </div>
                                         <div class=" form-group">
                                             <label>Username</label>
-                                            <input type="text" class="form-control" name="user_username" placeholder="Enter username" autocomplete="off" value="<?= $user_username ?>">
+                                            <input type="text" class="form-control" name="user_username" placeholder="Enter username" autocomplete="off" value="<?= $user_username ?>" <?= $disable ?>>
                                             <?= form_error('user_username', '<span class="ml-3 text-danger">', '</span>') ?>
                                         </div>
                                         <div class="form-group">
                                             <label>Level</label>
                                             <select class="form-control" name="level_id">
                                                 <?php foreach ($levelall as $key) : ?>
-                                                    <option value="<?= $key['level_id'] ?>"><?= $key['level_name'] ?></option>
+                                                    <?php $selected = ($user_level == $key['level_id']) ? "selected" : "" ?>
+                                                    <option value="<?= $key['level_id'] ?>" <?= $selected ?>><?= $key['level_name'] ?></option>
                                                 <?php endforeach ?>
                                             </select>
                                         </div>
@@ -58,8 +59,9 @@
                                             </div>
                                         </div>
                                         <br>
-                                        <button type="submit" class="btn btn-primary"><?= $button ?></button>
-                                        <a href="<?= site_url('admin/user') ?>" class="btn btn-success">Back</a>
+                                        <button type="submit" class="btn btn-flat bg-blue"><?= $button ?></button>
+                                        <a href="<?= site_url('admin/user') ?>" class="btn btn-flat bg-olive">Back</a>
+                                        <?= $user_delete ?>
                                     </div>
                                 </div>
                             </form>

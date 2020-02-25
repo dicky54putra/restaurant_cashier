@@ -3,7 +3,6 @@
         <section class="content-header">
             <h1>
                 <?= $title ?>
-                <a href="" class="btn btn-xs btn-primary"><i class="fa fa-plus"> Add User</i></a>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="<?= base_url() ?>"><i class="fa fa-dashboard"></i> Home</a></li>

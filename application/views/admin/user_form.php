@@ -13,7 +13,7 @@
 
         <section class="content">
             <div class="row">
-                <div class="col">
+                <div class="col-lg-6 col-md-6 ">
                     <div class="box">
                         <div class="box-header with-border">
                             <h3 class="box-title">Add User</h3>
@@ -22,7 +22,7 @@
                             <?= $this->session->flashdata('message'); ?>
                             <form action="<?= $action ?>" method="post">
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-6 ">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label>Name</label>
                                             <input type="text" class="form-control" name="user_name" placeholder="Enter name" autocomplete="off">
@@ -41,8 +41,6 @@
                                                 <?php endforeach ?>
                                             </select>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
                                         <div class=" form-group">
                                             <label>Password</label>
                                             <input type="password" class="form-control" name="user_password" placeholder="Enter password" autocomplete="off">
@@ -55,6 +53,7 @@
                                         </div>
                                         <br>
                                         <button type="submit" class="btn btn-primary"><?= $button ?></button>
+                                        <a href="<?= site_url('admin/user') ?>" class="btn btn-success">Back</a>
                                     </div>
                                 </div>
                             </form>

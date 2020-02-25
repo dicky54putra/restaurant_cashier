@@ -9,7 +9,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#"><?= $page ?></a></li>
+                <li class="active"><a href="#"><?= $page ?></a></li>
                 <li class="active"><?= $page2 ?></li>
             </ol>
         </section>
@@ -21,7 +21,7 @@
                 <div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title"><?= $title_list ?></h3>
+                            <h3 class="box-title"><?= $title ?></h3>
                         </div>
                         <div class="box-body table-responsive">
                             <table id="example1" class="table table-hover">
@@ -42,8 +42,8 @@
                                             <td><?= $key['table_no'] ?></td>
                                             <td><?= $key['table_capacity'] ?> Orang</td>
                                             <td>
-                                                <a onclick="return confirm('Anda yakin?')" href="<?= site_url('admin/table_delete/') . $key['table_id'] ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash" ></i></a>
-                                                <a href="<?= site_url('admin/table_edit/') . $key['table_id'] ?>" class="btn btn-sm btn-success" ><i class="fa fa-edit"></i></a>
+                                                <a onclick="return confirm('Anda yakin?')" href="<?= site_url('admin/table_delete/') . $key['table_id'] ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                                <a href="<?= site_url('admin/table_edit/') . $key['table_id'] ?>" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>

@@ -108,13 +108,40 @@ class Admin extends CI_Controller
 		}
 	}
 
+	public function user_detail($id)
+	{
+		$row = $this->admin_model->getUserById($id);
+		if ($row) {
+			$data = [
+				'title' => 'User Add',
+				'levelall' => $this->admin_model->getAllLevel(),
+				'action' => site_url('admin/user'),
+				'disable' => 'disabled',
+				'disable2' => '',
+				'button' => 'SAVE',
+				'user_name' => set_value('user_name', $row['user_name']),
+				'user_username' => set_value('user_name', $row['user_username']),
+				'user_status' => set_value('user_satus', $row['user_status'])
+			];
+		}
+		$this->load->view('template/header', $data);
+		$this->load->view('template/navbar', $data);
+		$this->load->view('admin/user_form', $data);
+		$this->load->view('template/footer');
+	}
+
 	public function user_add()
 	{
 		$data = [
 			'title' => 'User Add',
 			'levelall' => $this->admin_model->getAllLevel(),
 			'action' => site_url('admin/user'),
-			'button' => 'SAVE'
+			'disable' => '',
+			'disable2' => 'disabled',
+			'button' => 'SAVE',
+			'user_name' => '',
+			'user_username' => '',
+			'user_status' => ''
 		];
 		$this->form_validation->set_rules('user_name', 'Name user', 'trim|required');
 		$this->form_validation->set_rules('user_username', 'Username', 'trim|required|is_unique[user.user_username]');

@@ -24,12 +24,12 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label>Name</label>
-                                            <input type="text" class="form-control" name="user_name" placeholder="Enter name" autocomplete="off">
+                                            <input type="text" class="form-control" name="user_name" placeholder="Enter name" autocomplete="off" value="<?= $user_name ?>">
                                             <?= form_error('user_name', '<span class="ml-3 text-danger">', '</span>') ?>
                                         </div>
                                         <div class=" form-group">
                                             <label>Username</label>
-                                            <input type="text" class="form-control" name="user_username" placeholder="Enter username" autocomplete="off">
+                                            <input type="text" class="form-control" name="user_username" placeholder="Enter username" autocomplete="off" value="<?= $user_username ?>">
                                             <?= form_error('user_username', '<span class="ml-3 text-danger">', '</span>') ?>
                                         </div>
                                         <div class="form-group">
@@ -42,13 +42,20 @@
                                         </div>
                                         <div class=" form-group">
                                             <label>Password</label>
-                                            <input type="password" class="form-control" name="user_password" placeholder="Enter password" autocomplete="off">
+                                            <input type="password" class="form-control" name="user_password" placeholder="Enter password" autocomplete="off" <?= $disable ?>>
                                             <?= form_error('user_password', '<span class="ml-3 text-danger">', '</span>') ?>
                                         </div>
                                         <div class="form-group">
                                             <label>Repeat Password</label>
-                                            <input type="password" class="form-control" name="user_password2" placeholder="Enter repeat password" autocomplete="off">
+                                            <input type="password" class="form-control" name="user_password2" placeholder="Enter repeat password" autocomplete="off" <?= $disable ?>>
                                             <?= form_error('user_password2', '<span class="ml-3 text-danger">', '</span>') ?>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>User Status <?= $user_status ?></label>
+                                            <div class="radio">
+                                                <label><input type="radio" name="user_status" value="1" <?= $user_status == 1 ? "checked" : "" ?>> Active </label>&nbsp;&nbsp;&nbsp;
+                                                <label><input type="radio" name="user_status" value="0" <?= $user_status == 0 ? "checked" : "" ?>> Not Active</label>
+                                            </div>
                                         </div>
                                         <br>
                                         <button type="submit" class="btn btn-primary"><?= $button ?></button>

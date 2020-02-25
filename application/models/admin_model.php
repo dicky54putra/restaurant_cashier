@@ -13,6 +13,14 @@ class admin_model extends CI_Model
         return $this->db->get('user_view')->result_array();
     }
 
+    public function userSearch()
+    {
+        $keyword = $this->input->post('keyword', true);
+        $this->db->like('user_name', $keyword);
+        $this->db->or_like('user_username', $keyword);
+        return $this->db->get('user_view')->result_array();
+    }
+
     public function getUserById($id)
     {
         return $this->db->get_where('user', ['user_id' => $id])->row_array();

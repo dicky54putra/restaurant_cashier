@@ -91,21 +91,14 @@ class Admin extends CI_Controller
 			'action' => site_url('admin/user'),
 			'button' => 'SAVE'
 		];
-
-		$this->form_validation->set_rules('user_name', 'Name user', 'trim|required');
-		$this->form_validation->set_rules('user_username', 'Username', 'trim|required|is_unique[user.user_username]');
-		$this->form_validation->set_rules('user_password', 'Password', 'trim|required|min_length[3]');
-		$this->form_validation->set_rules('user_password2', 'Repeat password', 'trim|required|min_length[3]|matches[user_password]');
-
-		if ($this->form_validation->run() == false) {
-			$this->load->view('template/header', $data);
-			$this->load->view('template/navbar', $data);
-			$this->load->view('admin/user', $data);
-			$this->load->view('template/footer');
-		} else {
-			$this->admin_model->userAdd();
-			// echo 'ok';
+		if ($this->input->post('keyword')) {
+			$data['userall'] = $this->admin_model->userSearch();
 		}
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/navbar', $data);
+		$this->load->view('admin/user', $data);
+		$this->load->view('template/footer');
 	}
 
 	public function user_detail($id)

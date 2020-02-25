@@ -28,7 +28,8 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 5%">No</th>
-                                        <th>Talble Capacity</th>
+                                        <th>Talble No</th>
+                                        <th>Table Capacity</th>
                                         <th>action</th>
                                     </tr>
                                 </thead>

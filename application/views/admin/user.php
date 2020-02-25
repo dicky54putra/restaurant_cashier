@@ -5,7 +5,6 @@
         <section class="content-header">
             <h1>
                 <?= $title ?>
-                <a href="<?= site_url('admin/user_add') ?>" class="btn btn-sm btn-flat bg-blue"><i class="fa fa-plus"> Add User</i></a>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="<?= base_url() ?>"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -16,12 +15,26 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-8 col-md-8 col-sm-4 col-xs-4 inline">
+                    <a href="<?= site_url('admin/user_add') ?>" class="btn btn-sm btn-flat bg-blue"><i class="fa fa-plus"> Add User</i></a>
+                    <a href="<?= site_url('admin/user') ?>" class="btn btn-sm btn-flat bg-green"><i class="fa fa-refresh"></i></a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-8 col-xs-8">
+                    <form action="" method="post">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control" name="keyword" placeholder="Search..." autocomplete="off">
+                            <span class="input-group-btn">
+                                <button class="btn btn-info btn-flat" type="submit">Go!</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <div style="margin-top: 8px" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <?= $this->session->flashdata('message'); ?>
                 </div>
                 <!-- table list -->
                 <?php foreach ($userall as $key) : ?>
-                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                    <div style="margin-top: 8px" class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
                         <?php if ($key['user_status'] == 1) { ?>
                             <div class="small-box bg-aqua">
                             <?php } else { ?>

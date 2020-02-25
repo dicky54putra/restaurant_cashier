@@ -68,4 +68,11 @@ class admin_model extends CI_Model
         $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button> Successfully updated a table.</div>');
         redirect('admin/table');
     }
+
+    public function tableDelete($id)
+    {
+        $this->db->delete('table', ['table_id' => $id]);
+		$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  Successfully delete a table.</div>');
+		redirect('admin/table');
+    }
 }

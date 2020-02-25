@@ -26,8 +26,11 @@ class Admin extends CI_Controller
 			'title' => 'Admin page',
 			'tableall' => $this->admin_model->getAllTable(),
 			'title_box' => 'Table Add',
+			'title_list' => 'Table List',
 			'table_no' => set_value('table_no'),
 			'table_capacity' => set_value('table_capacity'),
+			'page' => 'Admin',
+			'page2' => 'table'
 		];
 
 		$this->form_validation->set_rules('table_no', 'table number', 'required');
@@ -51,8 +54,11 @@ class Admin extends CI_Controller
 				'title' => 'Admin page',
 				'tableall' => $this->admin_model->getAllTable(),
 				'title_box' => 'Table Edit',
+				'title_list' => 'Table List',
 				'table_no' => set_value('table_no', $row['table_no']),
 				'table_capacity' => set_value('table_capacity', $row['table_capacity']),
+				'page' => 'Admin',
+				'page2' => 'table'
 			];
 		}
 
@@ -71,8 +77,8 @@ class Admin extends CI_Controller
 
 	public function table_delete($id)
 	{
-		$this->db->delete('table', ['table_id' => $id]);
-		redirect('admin/table');
+		$this->admin_model->tableDelete($id);
+		
 	}
 
 	public function user()

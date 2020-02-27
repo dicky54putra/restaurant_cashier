@@ -4,9 +4,10 @@
     </div><!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
+        <?php $this->session->flashdata('message'); ?>
         <form action="" method="post">
             <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="Email" autocomplete="off" name="user_username">
+                <input type="text" class="form-control" placeholder="Username" autocomplete="off" name="user_username">
                 <span class="fa fa-user form-control-feedback"></span>
                 <?= form_error('user_username', '<span class="ml-3 text-danger">', '</span>') ?>
             </div>

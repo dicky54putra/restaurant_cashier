@@ -24,10 +24,27 @@ class Auth extends CI_Controller
         } else {
             $username = $this->input->post('user_username');
             $password = $this->input->post('user_password');
-            if ($username) {
-                # code...
+
+            $user = $this->db->get_where('user', ['user_username' => $username])->row_array();
+
+            if ($user) {
+                if (password_verify($password, $user['user_pasword'])) {
+                    $data = [
+                        'user_username' => $user['user_username'],
+                        'user_name' => $user['user_name'],
+                        'id_level' => $user['id_level']
+                    ];
+                    $this->session->set_userdata($data);
+                    if ($user['id_level'] == 1) {
+                        redirect('admin');
+                    }
+                } else {
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  incorrect username or password!.</div>');
+                    redirect('auth');
+                }
             } else {
                 $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  incorrect username or password!.</div>');
+                redirect('auth');
             }
         }
     }

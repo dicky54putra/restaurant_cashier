@@ -2,7 +2,7 @@
     <nav class="navbar navbar-static-top">
         <div class="container">
             <div class="navbar-header">
-                <a href="" class="navbar-brand"><b>Resto</b>CASH</a>
+                <a href="<?= site_url('dashboard') ?>" class="navbar-brand"><b>Resto</b>CASH</a>
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
@@ -27,7 +27,7 @@
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <li><a href="#"><span><i class="fa fa-sign-out"></i> Logout</span></a></li>
+                    <li><a href="<?= site_url('auth/logout') ?>"><span><i class="fa fa-sign-out"></i> Logout</span></a></li>
                 </ul>
             </div><!-- /.navbar-custom-menu -->
         </div><!-- /.container-fluid -->

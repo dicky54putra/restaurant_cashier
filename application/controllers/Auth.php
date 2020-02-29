@@ -28,18 +28,20 @@ class Auth extends CI_Controller
             $user = $this->db->get_where('user', ['user_username' => $username])->row_array();
 
             if ($user) {
-                if (password_verify($password, $user['user_pasword'])) {
+                if (password_verify($password, $user['user_password'])) {
                     $data = [
                         'user_username' => $user['user_username'],
-                        'user_name' => $user['user_name'],
-                        'id_level' => $user['id_level']
+                        'level_id' => $user['level_id']
                     ];
                     $this->session->set_userdata($data);
-                    if ($user['id_level'] == 1) {
-                        redirect('admin');
-                    }
+                    // echo $data['user_name'];
+                    // echo $data['level_id'];
+                    redirect('admin');
+                    // if ($user['id_level'] == 1) {
+                    //     redirect('admin');
+                    // }
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  incorrect username or password!.</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  incorrect  password!.</div>');
                     redirect('auth');
                 }
             } else {
@@ -47,5 +49,14 @@ class Auth extends CI_Controller
                 redirect('auth');
             }
         }
+    }
+
+    public function logout()
+    {
+        $this->session->unset_userdata('user_uesrname');
+        $this->session->unset_userdata('level_id');
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  Successfully logout!.</div>');
+        redirect('auth');
     }
 }

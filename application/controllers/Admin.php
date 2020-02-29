@@ -7,6 +7,9 @@ class Admin extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('admin_model');
+		if (!$this->is_logged_in()) {
+			redirect('auth');
+		}
 	}
 
 	public function index()
@@ -94,7 +97,6 @@ class Admin extends CI_Controller
 		if ($this->input->post('keyword')) {
 			$data['userall'] = $this->admin_model->userSearch();
 		}
-
 		$this->load->view('template/header', $data);
 		$this->load->view('template/navbar', $data);
 		$this->load->view('admin/user', $data);

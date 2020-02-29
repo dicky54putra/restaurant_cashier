@@ -4,8 +4,8 @@
     </div><!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
-        <?php $this->session->flashdata('message'); ?>
-        <form action="" method="post">
+        <?= $this->session->flashdata('message'); ?>
+        <form action="<?= site_url('auth') ?>" method="post">
             <div class="form-group has-feedback">
                 <input type="text" class="form-control" placeholder="Username" autocomplete="off" name="user_username">
                 <span class="fa fa-user form-control-feedback"></span>

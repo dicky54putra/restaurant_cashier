@@ -31,7 +31,8 @@ class Auth extends CI_Controller
                 if (password_verify($password, $user['user_password'])) {
                     $data = [
                         'user_username' => $user['user_username'],
-                        'level_id' => $user['level_id']
+                        'level_id' => $user['level_id'],
+                        'logged_in' => 'logged_in'
                     ];
                     $this->session->set_userdata($data);
                     // echo $data['user_name'];
@@ -53,8 +54,12 @@ class Auth extends CI_Controller
 
     public function logout()
     {
-        $this->session->unset_userdata('user_uesrname');
-        $this->session->unset_userdata('level_id');
+        $data = [
+            'user_username' => 'user_username',
+            'level_id' => 'level_id',
+            'logged_in' => 'logged_in'
+        ];
+        $this->session->unset_userdata($data);
 
         $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  Successfully logout!.</div>');
         redirect('auth');

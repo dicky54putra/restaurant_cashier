@@ -3,14 +3,10 @@
     <div class="container">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>
-                <?= $title ?>
-                <!-- <small>Example 2.0</small> -->
-            </h1>
+            <br>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active"><a href="#"><?= $page ?></a></li>
-                <li class="active"><?= $page2 ?></li>
+                <li class="active"><?= $title ?></li>
             </ol>
         </section>
 
@@ -19,11 +15,11 @@
             <div class="row">
                 <!-- table list -->
                 <div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
-                    <div class="box">
+                    <div class="box box-solid bg-green-gradient">
                         <div class="box-header with-border">
                             <h3 class="box-title"><?= $title ?></h3>
                         </div>
-                        <div class="box-body table-responsive">
+                        <div class="box-footer text-black table-responsive">
                             <table id="example1" class="table table-hover">
                                 <thead>
                                     <tr>
@@ -43,8 +39,8 @@
                                             <td><?= $key['table_no'] ?></td>
                                             <td><?= $key['table_capacity'] ?> Orang</td>
                                             <td>
-                                                <a onclick="return confirm('Anda yakin?')" href="<?= site_url('admin/table_delete/') . $key['table_id'] ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-                                                <a href="<?= site_url('admin/table_edit/') . $key['table_id'] ?>" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
+                                                <a onclick="return confirm('Anda yakin?')" href="<?= site_url('admin/table_delete/') . $key['table_id'] ?>" class="btn btn-sm bg-red btn-flat"><i class="fa fa-trash"></i></a>
+                                                <a href="<?= site_url('admin/table_edit/') . $key['table_id'] ?>" class="btn btn-sm btn-flat bg-green"><i class="fa fa-edit"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>
@@ -55,11 +51,11 @@
                 </div><!-- /.table list -->
                 <!-- form -->
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="box">
+                    <div class="box box-solid bg-blue-gradient">
                         <div class="box-header with-border">
                             <h3 class="box-title"><?= $title_box ?></h3>
                         </div>
-                        <div class="box-body">
+                        <div class="box-footer text-black">
                             <?= $this->session->flashdata('message'); ?>
                             <form action="" method="POST">
                                 <div class="form-group">
@@ -73,7 +69,7 @@
                                     <?= form_error('table_capacity', '<span class="ml-3 text-danger">', '</span>') ?>
                                 </div>
                                 <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="submit" class="btn btn-flat bg-blue">Save</button>
                                     <?= $back ?>
                                 </div>
                             </form>

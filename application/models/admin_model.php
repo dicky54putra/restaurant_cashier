@@ -104,4 +104,50 @@ class admin_model extends CI_Model
         $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  Successfully delete a table.</div>');
         redirect('admin/table');
     }
+
+    public function getAllMenu()
+    {
+        return $this->db->get('menu')->result_array();
+    }
+
+    public function getMenuById($id)
+    {
+        return $this->db->get_where('menu', ['menu_id' => $id])->row_array();
+    }
+
+    public function menuAdd()
+    {
+        $data = [
+            'menu_name' => $this->input->post('menu_name'),
+            'menu_description' => $this->input->post('menu_description'),
+            'menu_price' => $this->input->post('menu_price'),
+            'menu_status' => $this->input->post('menu_status')
+        ];
+        // var_dump($data);
+        // die;
+        $this->db->insert('menu', $data);
+        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  Successfully add a menu...</div>');
+        redirect('admin/index');
+    }
+
+    public function menuUpdate($id)
+    {
+        $data = [
+            'menu_name' => $this->input->post('menu_name'),
+            'menu_description' => $this->input->post('menu_description'),
+            'menu_price' => $this->input->post('menu_price'),
+            'menu_status' => $this->input->post('menu_status')
+        ];
+        $this->db->where('menu_id', $id);
+        $this->db->update('menu', $data);
+        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  Successfully Update a menu...</div>');
+        redirect('admin/index');
+    }
+
+    public function menuDelete($id)
+    {
+        $this->db->delete('menu', ['menu_id' => $id]);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  Successfully Delete a menu...</div>');
+        redirect('admin/index');
+    }
 }

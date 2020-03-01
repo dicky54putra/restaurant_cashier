@@ -13,11 +13,11 @@
         <section class="content">
             <div class="row">
                 <div class="col-lg-6 col-md-6 ">
-                    <div class="box">
+                    <div class="box box-solid bg-green-gradient">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Add User</h3>
+                            <h3 class="box-title"><?= $title ?></h3>
                         </div>
-                        <div class="box-body">
+                        <div class="box-footer text-black">
                             <?= $this->session->flashdata('message'); ?>
                             <form action="<?= $action ?>" method="post">
                                 <div class="row">
@@ -52,7 +52,7 @@
                                             <?= form_error('user_password2', '<span class="ml-3 text-danger">', '</span>') ?>
                                         </div>
                                         <div class="form-group">
-                                            <label>User Status <?= $user_status ?></label>
+                                            <label>User Status</label>
                                             <div class="radio">
                                                 <label><input type="radio" name="user_status" value="1" <?= $user_status == 1 ? "checked" : "" ?>> Active </label>&nbsp;&nbsp;&nbsp;
                                                 <label><input type="radio" name="user_status" value="0" <?= $user_status == 0 ? "checked" : "" ?>> Not Active</label>
@@ -60,7 +60,7 @@
                                         </div>
                                         <br>
                                         <button type="submit" class="btn btn-flat bg-blue"><?= $button ?></button>
-                                        <a href="<?= site_url('admin/user') ?>" class="btn btn-flat bg-olive">Back</a>
+                                        <a href="<?= site_url('admin/user') ?>" class="btn btn-flat bg-green">Back</a>
                                         <?= $user_delete ?>
                                     </div>
                                 </div>

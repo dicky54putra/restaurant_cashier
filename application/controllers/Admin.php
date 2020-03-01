@@ -7,7 +7,7 @@ class Admin extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('admin_model');
-		if (!$this->is_logged_in()) {
+		if (!$this->session->userdata('logged_in')) {
 			redirect('auth');
 		}
 	}
@@ -15,12 +15,71 @@ class Admin extends CI_Controller
 	public function index()
 	{
 		$data = [
-			'title' => 'Admin page'
+			'title' => 'Menu list',
+			'menuall' => $this->admin_model->getAllMenu(),
 		];
 		$this->load->view('template/header', $data);
 		$this->load->view('template/navbar', $data);
-		$this->load->view('admin/index', $data);
+		$this->load->view('admin/menu', $data);
 		$this->load->view('template/footer');
+	}
+
+	public function menu_add()
+	{
+		$data = [
+			'title' => 'Add Menu',
+			'button' => 'SAVE',
+			'menu_status' => 1,
+			'action' => site_url('admin/menu_add'),
+			'menu_name' => '',
+			'menu_description' => '',
+			'menu_price' => '',
+			'delete' => ''
+		];
+
+		$this->form_validation->set_rules('menu_name', 'table number', 'required');
+
+		if ($this->form_validation->run() == false) {
+			$this->load->view('template/header', $data);
+			$this->load->view('template/navbar', $data);
+			$this->load->view('admin/menu_form', $data);
+			$this->load->view('template/footer');
+		} else {
+			$this->admin_model->menuAdd();
+		}
+	}
+
+	public function menu_detail($id)
+	{
+		$row = $this->admin_model->getMenuById($id);
+		if ($row) {
+			$data = [
+				'title' => 'Add Menu',
+				'button' => 'SAVE',
+				'menu_status' => $row['menu_status'],
+				'action' => site_url('admin/menu_detail/' . $id),
+				'menu_name' => set_value('menu_name', $row['menu_name']),
+				'menu_description' => set_value('menu_description', $row['menu_description']),
+				'menu_price' => set_value('menu_price', $row['menu_price']),
+				'delete' => '<a href="' . site_url('admin/menu_delete/' . $row['menu_id']) . '" onclick="return confirm(' . "'Anda yakin?'" . ')" class="btn btn-flat bg-red">Delete</a>'
+			];
+		}
+
+		$this->form_validation->set_rules('menu_name', 'table number', 'required');
+
+		if ($this->form_validation->run() == false) {
+			$this->load->view('template/header', $data);
+			$this->load->view('template/navbar', $data);
+			$this->load->view('admin/menu_form', $data);
+			$this->load->view('template/footer');
+		} else {
+			$this->admin_model->menuUpdate($id);
+		}
+	}
+
+	public function menu_delete($id)
+	{
+		$this->admin_model->menuDelete($id);
 	}
 
 	public function table()
@@ -32,8 +91,6 @@ class Admin extends CI_Controller
 			'title_list' => 'Table List',
 			'table_no' => set_value('table_no'),
 			'table_capacity' => set_value('table_capacity'),
-			'page' => 'Admin',
-			'page2' => 'table',
 			'back' => ''
 		];
 
@@ -63,7 +120,7 @@ class Admin extends CI_Controller
 				'table_capacity' => set_value('table_capacity', $row['table_capacity']),
 				'page' => 'Admin',
 				'page2' => 'table',
-				'back' => '<a href="' . site_url('admin/table') . '" class="btn btn-success">Back</a>'
+				'back' => '<a href="' . site_url('admin/table') . '" class="btn btn-flat bg-green">Back</a>'
 			];
 		}
 
@@ -141,7 +198,7 @@ class Admin extends CI_Controller
 			'button' => 'SAVE',
 			'user_name' => '',
 			'user_username' => '',
-			'user_status' => '',
+			'user_status' => 1,
 			'user_delete' => ''
 		];
 		$this->form_validation->set_rules('user_name', 'Name user', 'trim|required');

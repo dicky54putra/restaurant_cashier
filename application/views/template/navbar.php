@@ -19,7 +19,7 @@
                             <li><a href="<?= base_url('admin/table') ?>"><i class="fa fa-th-large"></i> Table</span></a></li>
                         </ul>
                     </li>
-                    <li><a href=""><span><i class="fa fa-money"></i> Transaction</span></a></li>
+                    <li><a href="<?= site_url('order') ?>"><span><i class="fa fa-money"></i> Transaction</span></a></li>
                     <li><a href="#"><span><i class="fa fa-print"></i> Report</span></a></li>
                     <li><a href="#"><span><i class="fa fa-shopping-cart"></i> Service</span></a></li>
                 </ul>

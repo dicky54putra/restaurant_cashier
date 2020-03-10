@@ -107,7 +107,17 @@ class admin_model extends CI_Model
 
     public function getAllMenu()
     {
-        return $this->db->get('menu')->result_array();
+        return $this->db->get('menu_view')->result_array();
+    }
+
+    public function menuSearch()
+    {
+        $keyword = $this->input->post('keyword', true);
+        $this->db->like('menu_name', $keyword);
+        $this->db->or_like('menu_price', $keyword);
+        $this->db->or_like('menu_description', $keyword);
+        $this->db->or_like('mc_name', $keyword);
+        return $this->db->get('menu_view')->result_array();
     }
 
     public function getMenuById($id)

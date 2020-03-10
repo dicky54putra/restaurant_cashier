@@ -18,6 +18,9 @@ class Admin extends CI_Controller
 			'title' => 'Menu list',
 			'menuall' => $this->admin_model->getAllMenu(),
 		];
+		if ($this->input->post('keyword')) {
+			$data['menuall'] = $this->admin_model->menuSearch();
+		}
 		$this->load->view('template/header', $data);
 		$this->load->view('template/navbar', $data);
 		$this->load->view('admin/menu', $data);

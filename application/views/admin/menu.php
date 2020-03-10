@@ -39,7 +39,7 @@
                             <?php } else { ?>
                                 <div class="info-box bg-red">
                                 <?php } ?>
-                                <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
+                                <span class="info-box-icon"><i class="fa fa-<?= $key['mc_icon'] ?>"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text"><?= $key['menu_name'] ?></span>
                                     <span class="info-box-number"><?= $key['menu_price'] ?></span>

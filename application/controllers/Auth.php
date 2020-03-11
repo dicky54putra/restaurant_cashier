@@ -28,21 +28,26 @@ class Auth extends CI_Controller
             $user = $this->db->get_where('user', ['user_username' => $username])->row_array();
 
             if ($user) {
-                if (password_verify($password, $user['user_password'])) {
-                    $data = [
-                        'user_username' => $user['user_username'],
-                        'level_id' => $user['level_id'],
-                        'logged_in' => 'logged_in'
-                    ];
-                    $this->session->set_userdata($data);
-                    // echo $data['user_name'];
-                    // echo $data['level_id'];
-                    redirect('admin');
-                    // if ($user['id_level'] == 1) {
-                    //     redirect('admin');
-                    // }
+                if ($user['user_status'] == 1) {
+                    if (password_verify($password, $user['user_password'])) {
+                        $data = [
+                            'user_username' => $user['user_username'],
+                            'level_id' => $user['level_id'],
+                            'logged_in' => 'logged_in'
+                        ];
+                        $this->session->set_userdata($data);
+                        // echo $data['user_name'];
+                        // echo $data['level_id'];
+                        redirect('admin');
+                        // if ($user['id_level'] == 1) {
+                        //     redirect('admin');
+                        // }
+                    } else {
+                        $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  incorrect  password!.</div>');
+                        redirect('auth');
+                    }
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  incorrect  password!.</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  User not actived!.</div>');
                     redirect('auth');
                 }
             } else {
